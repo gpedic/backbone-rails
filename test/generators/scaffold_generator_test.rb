@@ -27,7 +27,8 @@ class ScaffoldGeneratorTest < Rails::Generators::TestCase
     assert_file "#{backbone_path}/routers/blog_posts_router.js.coffee" do |router|
       assert_match /class Dummy.Routers.BlogPostsRouter extends Backbone.Router/, router
       assert_match /newBlogPost: ->/, router
-      assert_match /@blogPosts.reset options.blogPosts/, router
+      assert_match /@blog_posts = new Dummy.Collections.BlogPostsCollection()/, router
+      assert_match /@blog_posts.reset options.blogPosts/, router
       
       %w(NewView IndexView ShowView EditView).each do |view|
         assert_match /new Dummy.Views.BlogPosts.#{view}/, router
